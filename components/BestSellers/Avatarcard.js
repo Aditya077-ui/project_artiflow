@@ -1,4 +1,6 @@
+import Image from 'next/image'
 import React from 'react'
+
 
 function AvatarCard({ img, name, handle, gradient }) {
     return (
@@ -10,10 +12,11 @@ function AvatarCard({ img, name, handle, gradient }) {
                     <div className={`h-24 ${gradient}`}></div>
                     {/* Avatar */}
                     <div className='self-center -mt-12 mb-6'>
-                        <img
+                        <Image
                             src={img}
                             alt=''
                             className=' rounded-full bg-center object-cover w-24 h-24 overflow-hidden'
+                            height={150}
                         />
                     </div>
                     {/* Content */}

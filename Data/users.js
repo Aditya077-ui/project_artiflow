@@ -1,14 +1,14 @@
-import avatar1 from '/public/Assets/avatars/avatar1.jpg'
-import avatar2 from '/public/Assets/avatars/avatar2.jpg'
-import avatar3 from '/public/Assets/avatars/avatar3.jpg'
-import avatar4 from '/public/Assets/avatars/avatar4.jpg'
-import avatar5 from '/public/Assets/avatars/avatar5.jpg'
-import avatar6 from '/public/Assets/avatars/avatar6.jpg'
-import avatar7 from '/public/Assets/avatars/avatar7.jpg'
+import avatar1 from '../public/Assets/avatars/avatar1.jpg'
+import avatar2 from '../public/Assets/avatars/avatar2.jpg'
+import avatar3 from '../public/Assets/avatars/avatar3.jpg'
+import avatar4 from '../public/Assets/avatars/avatar4.jpg'
+import avatar5 from '../public/Assets/avatars/avatar5.jpg'
+import avatar6 from '../public/Assets/avatars/avatar6.jpg'
+import avatar7 from '../public/Assets/avatars/avatar7.jpg'
 
 const users = [
     {
-        name: 'Calvin Carlo',
+        name: 'kevin philips',
         handle: 'johnny Deep',
         gradient: 'bg-gradient-to-r from-green-300 via-blue-500 to-purple-600',
         img: avatar1,

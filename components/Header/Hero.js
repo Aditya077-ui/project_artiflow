@@ -48,7 +48,7 @@ function Hero() {
                 >
                     <motion.img
                         variants={VideoVariants}
-                        src='Assets/click.png'
+                        src='/click.png'
                         alt=''
                         className='object-cover w-full h-full'
                     />
