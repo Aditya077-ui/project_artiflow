@@ -6,6 +6,10 @@ import Hero from '@/components/Header/Hero'
 import Steps from '@/components/Steps/Steps';
 import BestSellers from '@/components/BestSellers/BestSellers'
 import HotProducts from '@/components/HotProducts/HotProducts'
+import Collections from '@/components/collections/Collections'
+import CTA from '@/components/JoinUs.js/CTA'
+import Blog from '@/components/Blog/blog'
+import Footer from '@/components/Footer/footer'
 
 
 //const inter = Inter({ subsets: ['latin'] })
@@ -25,6 +29,10 @@ export default function Home() {
         <Steps />
         <BestSellers />
         <HotProducts />
+        <Collections />
+        <CTA />
+        <Blog />
+        <Footer />
       </>
     </div>
   )

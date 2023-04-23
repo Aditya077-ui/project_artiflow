@@ -16,7 +16,8 @@ function AvatarCard({ img, name, handle, gradient }) {
                             src={img}
                             alt=''
                             className=' rounded-full bg-center object-cover w-24 h-24 overflow-hidden'
-                            height={150}
+                            height={150
+                            }
                         />
                     </div>
                     {/* Content */}
