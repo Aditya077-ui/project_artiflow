@@ -7,7 +7,7 @@ import Steps from '@/components/Steps/Steps';
 import BestSellers from '@/components/BestSellers/BestSellers'
 import HotProducts from '@/components/HotProducts/HotProducts'
 import Collections from '@/components/collections/Collections'
-import CTA from '@/components/JoinUs.js/CTA'
+import CTA from '@/components/JoinUs/CTA'
 import Blog from '@/components/Blog/blog'
 import Footer from '@/components/Footer/footer'
 
