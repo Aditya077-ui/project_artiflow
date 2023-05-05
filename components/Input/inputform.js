@@ -1,6 +1,11 @@
-const Input = ({ inputType, title, placeholder, handleClick }) => {
+const Input = ({ inputType,category, title, placeholder, handleClick }) => {
 
     return (
+        // <div className="mt-10 w-full">
+        //     <p className="font-poppins dark:text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 focus:outline-none caret-rose-500 text-nft-black-1 font-semibold text-xl">
+        //         {category}
+
+        //     </p>
         <div className="mt-10 w-full">
             <p className="font-poppins dark:text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 focus:outline-none caret-rose-500 text-nft-black-1 font-semibold text-xl">
                 {title}
@@ -33,7 +38,8 @@ const Input = ({ inputType, title, placeholder, handleClick }) => {
                     onChange={handleClick}
                 />
             )}
-        </div>
+            </div>
+        // </div>
     );
 };
 

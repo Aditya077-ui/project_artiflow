@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes';
 import click1 from '../public/click1.jpg';
 import Input from '@/components/Input/inputform';
 import Button from '@/components/Input/formbutton';
+import DropdownInput from '@/components/Input/dropdown';
 import { motion, AnimatePresence } from 'framer-motion'
 import { parentVariants, childVariants } from '@/Animations/common'
 import {
@@ -21,6 +22,14 @@ const CreateNFT = () => {
         name: '',
         description: '',
     });
+    const [category, setCategory] = useState('')
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value)
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        //console.log(category)
+    }
 
     const { theme } = useTheme();
 
@@ -121,6 +130,30 @@ const CreateNFT = () => {
                                 </div>
 
                             </div>
+                            <div className=" mt-4 container mx-auto">
+                                <form onSubmit={handleSubmit}>
+
+                                    <DropdownInput
+                                        label="Category"
+                                        name="category"
+
+
+                                        options={[
+
+                                            { placeholder: 'select a category', label: 'select a category', },
+                                            { value: 'Digital Arts', label: 'Digital Arts' },
+                                            { value: 'Sports', label: 'Sports' },
+                                            { value: 'Photography', label: 'Photography' },
+                                            { value: 'Music', label: 'Music' },
+                                            { value: 'Digital Products', label: 'Digital Products' },
+                                        ]}
+                                        value={category}
+                                        onChange={handleCategoryChange}
+                                    />
+
+                                </form>
+                            </div>
+
                             <Input
                                 inputType="input"
                                 title="Name"
