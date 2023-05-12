@@ -23,7 +23,7 @@ function Steps({marketplace}) {
                                 icon='1'
                             />
                         </motion.div>
-                        <Link href={`/Create_NFT`}>
+                        <Link href="/Create_NFT">
                             <motion.div variants={childVariants}>
                                 <StepCard
                                     title='Create your NFT Item'

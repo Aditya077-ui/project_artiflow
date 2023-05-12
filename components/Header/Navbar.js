@@ -3,6 +3,7 @@ import { ethers } from "ethers"
 // import { AiOutlineMenu } from 'react-icons/ai'
 // import { IoClose } from 'react-icons/io5'
 // import navLinks from '@/Data/navLinks'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { parentVariants, childVariants } from '@/Animations/common'
 import {
@@ -10,9 +11,9 @@ import {
     mobileFlexContainer,
     mobileLinkVariants,
 } from '@/Animations/mobilenav'
-function Navbar({web3Handler, account}) {
+function Navbar({ web3Handler, account }) {
     const [nav, setNav] = useState(false)
-   
+
 
     const toggleNav = () => {
         setNav((prev) => {
@@ -28,7 +29,7 @@ function Navbar({web3Handler, account}) {
 
     return (
         <>
-            <nav className='p-4 bg-slate-900'>
+            <nav className='fixed top-0 w-full z-50 p-4 bg-slate-900 shadow-xl'>
                 <div className='container mx-auto max-w-6xl relative'>
                     {/* Flex Container */}
 
@@ -43,7 +44,7 @@ function Navbar({web3Handler, account}) {
                             variants={childVariants}
                             className='text-2xl font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400'
                         >
-                            <span className=''>Artiflow</span>
+                            <Link href="/"><span className=''>Artiflow</span></Link>
                         </motion.h1>
                         <motion.h1
                             variants={childVariants}
@@ -64,8 +65,13 @@ function Navbar({web3Handler, account}) {
                                 )
                             })} */}
 
-                           { account  ? (<button className={styles.btn}>{account.slice(0, 5) + '...' + account.slice(38, 42)}</button>) : 
-                                            (<button className={styles.btn} onClick={web3Handler}>Connect Wallet</button>)}
+                            <Link href="/purchase_NFT"><button className='hover:text-gray-400 font-semibold'>purchase List</button></Link>
+
+
+                            <Link href="/List_NFT"><button className='hover:text-gray-400 font-semibold'>Listed Items</button></Link>
+
+                            {account ? (<button className={styles.btn}>{account.slice(0, 5) + '...' + account.slice(38, 42)}</button>) :
+                                (<button className={styles.btn} onClick={web3Handler}>Connect Wallet</button>)}
                         </motion.div>
                         {/* Hamburger Menu */}
                         <motion.div

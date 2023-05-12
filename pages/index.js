@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/runtime */
 
 import React, { useContext, useState } from 'react'
-import { ethers }  from 'ethers'
+import { ethers } from 'ethers'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -18,9 +18,9 @@ import NFTMarketplaceAddress from '../artifacts/contracts/NFTMarketplace.sol/NFT
 import NFTMarketplaceAbi from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 import { motion } from 'framer-motion'
 import {
-    parentNFTVariants,
-    parentVariants,
-    childVariants,
+  parentNFTVariants,
+  parentVariants,
+  childVariants,
 } from '@/Animations/hotProducts'
 import AppContext from '@/components/context/AppContext'
 
@@ -30,52 +30,52 @@ import AppContext from '@/components/context/AppContext'
 
 export default function Home() {
   // const [provider, setProvider] = useState()
-const [loading, setLoading] = useState(true)
-const [account, setAccount] = useState()
-const context = useContext(AppContext);
-// MetaMask Login/Connect
-const web3Handler = async () => {
-if (typeof window.ethereum !== 'undefined') {
-    
-    try {
+  const [loading, setLoading] = useState(true)
+  const [account, setAccount] = useState()
+  const context = useContext(AppContext);
+  // MetaMask Login/Connect
+  const web3Handler = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+
+      try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         setAccount(accounts[0])
         context.setAccountContext(accounts[0])
         // Get provider from Metamask
-        const provider =  new ethers.providers.Web3Provider(window.ethereum)
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
         const signer = provider.getSigner()
-       
+
 
         window.ethereum.on('chainChanged', (chainId) => {
-        window.location.reload();
+          window.location.reload();
         })
 
         window.ethereum.on('accountsChanged', async function (accounts) {
-        setAccount(accounts[0])
-        context.setAccountContext(accounts[0])
-        await web3Handler()
+          setAccount(accounts[0])
+          context.setAccountContext(accounts[0])
+          await web3Handler()
         })
         setLoading(false)
         console.log(loading)
         loadContracts(signer)
-    
-    } catch (err) {
-      console.error('User rejected account connection request')
+
+      } catch (err) {
+        console.error('User rejected account connection request')
+      }
+    } else {
+      alert('Please install Metamask to continue !')
     }
-  } else {
-    alert('Please install Metamask to continue !')
   }
-}
 
 
-const loadContracts = async (signer) => {
-// Get deployed copies of contracts
-const marketplace =  new ethers.Contract(NFTMarketplaceAddress.address, NFTMarketplaceAbi.abi, signer)
-context.setMarketplace(marketplace)
-setLoading(false)
-console.log(marketplace)
+  const loadContracts = async (signer) => {
+    // Get deployed copies of contracts
+    const marketplace = new ethers.Contract(NFTMarketplaceAddress.address, NFTMarketplaceAbi.abi, signer)
+    context.setMarketplace(marketplace)
+    setLoading(false)
+    console.log(marketplace)
 
-}
+  }
 
   return (
     <div>
@@ -87,30 +87,30 @@ console.log(marketplace)
       </Head>
       <>
         <Navbar web3Handler={web3Handler} account={account} />
-        {loading ? 
-                <motion.p
-                variants={childVariants}
-                className='text-slate-400 max-w-lg text-center'
-                  >
-                     Connecting to the metamask....
-                  </motion.p>
-             :
-             ( 
-              <div>
+        {!loading ?
+          <motion.p
+            variants={childVariants}
+            className='text-slate-400 max-w-lg text-center'
+          >
+            Connecting to the metamask....
+          </motion.p>
+          :
+          (
+            <div>
               <Hero />
-             <Steps />
-             <BestSellers />
-             <HotProducts/>
-             <Collections />
-             <CTA />
-             <Blog />
-             <Footer />
-             </div>  
-             
-             )
-    
-    }
-      
+              <Steps />
+              <BestSellers />
+              <HotProducts />
+              <Collections />
+              <CTA />
+              <Blog />
+              <Footer />
+            </div>
+
+          )
+
+        }
+
       </>
     </div>
   )

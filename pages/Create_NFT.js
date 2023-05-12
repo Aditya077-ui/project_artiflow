@@ -21,8 +21,8 @@ import {
 import AppContext from '@/components/context/AppContext';
 import NFTMarketplaceAddress from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
 // import NFTMarketplaceAbi from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
- const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweENlNWYwNmVBOGE3MmMxRTI0ZDFEMzU2ODcxOTA3M2E3YjVBNTA3MTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODM0NjMwMzk2MDksIm5hbWUiOiJBcnRpZmxvdyJ9.baGrARtAQVqi7rUP_nIRzj36yumij9jdZG4ivPlR8fg'
- const client = new Web3Storage({ token: apiKey })
+const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweENlNWYwNmVBOGE3MmMxRTI0ZDFEMzU2ODcxOTA3M2E3YjVBNTA3MTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODM0NjMwMzk2MDksIm5hbWUiOiJBcnRpZmxvdyJ9.baGrARtAQVqi7rUP_nIRzj36yumij9jdZG4ivPlR8fg'
+const client = new Web3Storage({ token: apiKey })
 
 const CreateNFT = () => {
     const context = useContext(AppContext)
@@ -31,10 +31,10 @@ const CreateNFT = () => {
     const [formInput, setFormInput] = useState({
         price: '',
         name: '',
-        description: '',    
+        description: '',
     });
     const [category, setCategory] = useState('')
-   
+
     const handleCategoryChange = (event) => {
         setCategory(event.target.value)
     }
@@ -77,78 +77,78 @@ const CreateNFT = () => {
     // );
 
 
-   
+
     const uploadToIPFS = async (event) => {
-      event.preventDefault()
-    //   const imageFile = document.getElementById('image-input').files[0]
-      const imageFile =await event.target.files[0]
-      if (typeof imageFile !== 'undefined') {
-        try {
-            const reader = new FileReader()
-            const bufferPromise = new Promise((resolve, reject) => {
-              reader.onerror = () => {
-                reader.abort()
-                reject(new Error('Error reading file'))
-              }
-          
-              reader.onload = () => {
-                resolve(reader.result)
-              }
-          
-              reader.readAsArrayBuffer(imageFile)
-            })
-            const data = await bufferPromise
-            const files = [
-                new File([new Uint8Array(data)], imageFile.name, { type: imageFile.type })
-            ]
-            const result = await client.put(files)
-            setFileUrl(`${result}.ipfs.w3s.link/${imageFile.name}`)
-            console.log(`${result}.ipfs.w3s.link/${imageFile.name}`)
-            
-        } catch (error){
-          console.log("ipfs image upload error: ", error)
+        event.preventDefault()
+        //   const imageFile = document.getElementById('image-input').files[0]
+        const imageFile = await event.target.files[0]
+        if (typeof imageFile !== 'undefined') {
+            try {
+                const reader = new FileReader()
+                const bufferPromise = new Promise((resolve, reject) => {
+                    reader.onerror = () => {
+                        reader.abort()
+                        reject(new Error('Error reading file'))
+                    }
+
+                    reader.onload = () => {
+                        resolve(reader.result)
+                    }
+
+                    reader.readAsArrayBuffer(imageFile)
+                })
+                const data = await bufferPromise
+                const files = [
+                    new File([new Uint8Array(data)], imageFile.name, { type: imageFile.type })
+                ]
+                const result = await client.put(files)
+                setFileUrl(`${result}.ipfs.w3s.link/${imageFile.name}`)
+                console.log(`${result}.ipfs.w3s.link/${imageFile.name}`)
+
+            } catch (error) {
+                console.log("ipfs image upload error: ", error)
+            }
         }
-      }
     }
     const createNFT = async () => {
         console.log(context.marketplace);
 
-      if (!fileUrl || !formInput.price || !formInput.name || !category|| !formInput.description ) return
-      try{
-            const obj = { 
+        if (!fileUrl || !formInput.price || !formInput.name || !category || !formInput.description) return
+        try {
+            const obj = {
                 name: formInput.name,
                 category: category,
                 price: formInput.price,
                 description: formInput.description,
-                fileUrl: fileUrl 
+                fileUrl: fileUrl
             }
             const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' })
 
-        const files = [new File([blob], 'data.json')]
-        const result = await client.put(files)
-        console.log(result)
-        mintThenList(result) 
+            const files = [new File([blob], 'data.json')]
+            const result = await client.put(files)
+            console.log(result)
+            mintThenList(result)
 
-      } catch(error) {
-        console.log("ipfs uri upload error: ", error)
-      }
+        } catch (error) {
+            console.log("ipfs uri upload error: ", error)
+        }
     }
- const mintThenList = async (result) => {
-      const url = `${result}.ipfs.w3s.link/data.json`
-      // mint nft 
- 
-      // get tokenId of new nft 
-      // approve marketplace to spend nft
-      const price = ethers.utils.parseUnits(formInput.price, 'ether')
-      await(await context.marketplace.setApprovalForAll(NFTMarketplaceAddress.address, true)).wait()
-      // add nft to marketplace
-    //   const listingPrice = ethers.utils.parseEther(price.toString())
+    const mintThenList = async (result) => {
+        const url = `${result}.ipfs.w3s.link/data.json`
+        // mint nft 
+
+        // get tokenId of new nft 
+        // approve marketplace to spend nft
+        const price = ethers.utils.parseUnits(formInput.price, 'ether')
+        await (await context.marketplace.setApprovalForAll(NFTMarketplaceAddress.address, true)).wait()
+        // add nft to marketplace
+        //   const listingPrice = ethers.utils.parseEther(price.toString())
         let listingPrice = await context.marketplace.getListingPrice()
         listingPrice = listingPrice.toString()
-        await(await context.marketplace.createToken(url, price , { value: listingPrice })).wait()
-    //   await(await marketplace.makeItem(nft.address, id, listingPrice)).wait()
-    console.log(url);
-}
+        await (await context.marketplace.createToken(url, price, { value: listingPrice })).wait()
+        //   await(await marketplace.makeItem(nft.address, id, listingPrice)).wait()
+        console.log(url);
+    }
     return (
 
         <div className="mt-4 mb-4">
@@ -213,7 +213,7 @@ const CreateNFT = () => {
                                         </aside>
                                     )} */}
 
-                                {/* <Form.Control
+                                    {/* <Form.Control
                                     type="file"
                                     required
                                     name="file"
@@ -249,9 +249,9 @@ const CreateNFT = () => {
                             <input
                                 type="file"
                                 name="Asset"
-                                className="my-4"
+                                className="my-4 rounded-lg"
                                 onChange={uploadToIPFS}
-                                />
+                            />
                             <Input
                                 inputType="input"
                                 title="Name"
@@ -281,8 +281,8 @@ const CreateNFT = () => {
                                     btnName="Create NFT"
                                     className="rounded-xl"
                                     handleClick=
-                                        {createNFT}
-                                    
+                                    {createNFT}
+
                                 />
                             </div>
                         </motion.h1>
