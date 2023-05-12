@@ -1,16 +1,28 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { AiOutlineCloseCircle, AiFillHeart, AiOutlineClockCircle } from 'react-icons/ai'
 import { FaEthereum } from 'react-icons/fa'
+import AppContext from '@/components/context/AppContext'
+import { ethers }  from 'ethers'
 
 
-function NFTCard({ img, title, price, likes, sale }) {
+function NFTCard({ img, title, price, likes, sale, tokenId }) {
+    const context = useContext(AppContext);
+
+    async function buyNft(p, tID) {
+        const price = ethers.utils.parseUnits(p.toString(), 'ether')   
+        const transaction = await context.marketplace.createMarketSale(tID, {
+          value: price
+        })
+        await transaction.wait()
+        // loadNFTs()
+      }
     return (
         <>
             <div className='flex group flex-col space-y-10 rounded-lg overflow-hidden border border-slate-400/10 pb-8 hover:shadow-xl duration-500 ease-in-out hover:shadow-white/5 relative'>
                 {/*Image and Counter*/}
                 <div className='flex flex-col items-start relative'>
-                    <Image src={img} alt='NFT' width={300} height={200} className='object-cover' />
+                    <img src={`https://${img}`} alt='NFT' width={300} height={200} className='object-cover' />
                     {sale && (
                         <div className='flex space-x-2 items-center justify-center px-4 py-1 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 rounded-x1 absolute bottom-5 left-5'>
                             <AiOutlineClockCircle />
@@ -38,7 +50,7 @@ function NFTCard({ img, title, price, likes, sale }) {
                 </div>
                 {/* Hover */}
                 <div className='absolute hidden top-1/4 left-1/3 md:left-1/4 group-hover:flex animate-bounce transition-all ease-in-out duration-1000'>
-                    <button className='text-sm px-6 py-2 bg-indigo-600 rounded-md hover:bg-indigo-700 duration-200 ease-in-out'>
+                    <button onClick = {buyNft(price,tokenId)} className='text-sm px-6 py-2 bg-indigo-600 rounded-md hover:bg-indigo-700 duration-200 ease-in-out'>
                         Place bid
                     </button>
                 </div>

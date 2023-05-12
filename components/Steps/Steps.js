@@ -3,7 +3,7 @@ import StepCard from './StepCard'
 import { motion } from 'framer-motion'
 import { parentVariants, childVariants } from '@/Animations/common'
 import Link from 'next/link';
-function Steps() {
+function Steps({marketplace}) {
     return (
         <>
             <section className='py-24 p-4'>
@@ -23,7 +23,7 @@ function Steps() {
                                 icon='1'
                             />
                         </motion.div>
-                        <Link href="/Create_NFT">
+                        <Link href={`/Create_NFT`}>
                             <motion.div variants={childVariants}>
                                 <StepCard
                                     title='Create your NFT Item'

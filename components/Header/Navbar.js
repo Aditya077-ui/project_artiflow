@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { ethers } from "ethers"
 // import { AiOutlineMenu } from 'react-icons/ai'
 // import { IoClose } from 'react-icons/io5'
 // import navLinks from '@/Data/navLinks'
@@ -9,8 +10,10 @@ import {
     mobileFlexContainer,
     mobileLinkVariants,
 } from '@/Animations/mobilenav'
-function Navbar() {
+function Navbar({web3Handler, account}) {
     const [nav, setNav] = useState(false)
+   
+
     const toggleNav = () => {
         setNav((prev) => {
             return !prev
@@ -61,7 +64,8 @@ function Navbar() {
                                 )
                             })} */}
 
-                            <button className={styles.btn}>Connect Wallet</button>
+                           { account  ? (<button className={styles.btn}>{account.slice(0, 5) + '...' + account.slice(38, 42)}</button>) : 
+                                            (<button className={styles.btn} onClick={web3Handler}>Connect Wallet</button>)}
                         </motion.div>
                         {/* Hamburger Menu */}
                         <motion.div

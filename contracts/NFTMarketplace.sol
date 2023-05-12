@@ -33,6 +33,15 @@ contract NFTMarketplace is ERC721URIStorage {
       bool sold
     );
 
+    event Bought(
+        uint itemId,
+        address indexed nft,
+        uint tokenId,
+        uint price,
+        address indexed seller,
+        address indexed buyer
+    );
+
     constructor() ERC721("Metaverse Tokens", "METT") {
       owner = payable(msg.sender);
     }
@@ -96,9 +105,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
     /* Creates the sale of a marketplace item */
     /* Transfers ownership of the item, as well as funds between parties */
-    function createMarketSale(
-      uint256 tokenId
-      ) public payable {
+    function createMarketSale(uint256 tokenId) public payable {
       uint price = idToMarketItem[tokenId].price;
       address seller = idToMarketItem[tokenId].seller;
       require(msg.value == price, "Please submit the asking price in order to complete the purchase");
