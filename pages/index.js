@@ -3,9 +3,6 @@
 import React, { useContext, useState } from 'react'
 
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Navbar from '@/components/Header/Navbar'
 import Hero from '@/components/Header/Hero'
 import Steps from '@/components/Steps/Steps';
 import BestSellers from '@/components/BestSellers/BestSellers'
@@ -40,7 +37,7 @@ export default function Home() {
       </Head>
       <>
 
-        {context.accountContext ?
+        {!context.accountContext ?
           (
             <div className='flex h-screen items-center justify-center'>
               <motion.p

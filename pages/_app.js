@@ -3,7 +3,6 @@ import { useState, createContext } from 'react';
 import AppContext from '@/components/context/AppContext'
 import Navbar from '@/components/Header/Navbar';
 import { ethers } from 'ethers'
-// import NFTMarketplaceAddress from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
 import NFTMarketplaceAbi from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 
 export default function App({ Component, pageProps }) {
@@ -51,7 +50,6 @@ export default function App({ Component, pageProps }) {
 
 
   const loadContracts = async (signer) => {
-    // Get deployed copies of contracts
     const marketplace = new ethers.Contract(contractAddress, NFTMarketplaceAbi.abi, signer)
     setMarketplace(marketplace)
     setLoading(false)
@@ -70,4 +68,3 @@ export default function App({ Component, pageProps }) {
 }
 
 
-// https://dev.to/edge-and-node/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb

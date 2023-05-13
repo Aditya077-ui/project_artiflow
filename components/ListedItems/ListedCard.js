@@ -1,7 +1,6 @@
 import React from 'react'
 import { AiOutlineClockCircle, AiFillHeart } from 'react-icons/ai'
 import { FaEthereum } from 'react-icons/fa'
-import Image from 'next/image'
 
 function Listed_Card({ img, title, price, likes, sale }) {
     return (
@@ -9,7 +8,7 @@ function Listed_Card({ img, title, price, likes, sale }) {
             <div className='flex group flex-col space-y-10 rounded-lg overflow-hidden border border-slate-400/10 pb-8 hover:shadow-xl duration-500 ease-in-out hover:shadow-white/5 relative'>
                 {/* Image & Counter */}
                 <div className='flex flex-col items-start relative'>
-                    <Image src={img} alt='NFT' className='object-cover' />
+                    <img src={`https://${img}`} alt='NFT' className='object-cover' />
                     {sale && (
                         <div className='flex space-x-2 items-center justify-center px-4 py-1 bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 rounded-xl absolute bottom-5 left-5'>
 

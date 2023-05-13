@@ -1,12 +1,9 @@
 import React, {useEffect, useState, useContext} from 'react'
 import { ethers } from 'ethers'
 import Purchase_Card from './PurchaseCard'
-import NFTCard from '../HotProducts/NFTCard'
-// import nfts from '@/Data/nfts'
 import { motion } from 'framer-motion'
 import AppContext from '../context/AppContext'
 import axios from 'axios'
-import NFTMarketplaceAbi from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 import {
     parentNFTVariants,
     parentVariants,
@@ -109,7 +106,7 @@ function PurchaseCard_List() {
         
                ) :
                (
-                <div className='flex h-screen items-center justify-center'>
+                <div className='flex items-center justify-center'>
                 <motion.p
                     variants={childVariants}
                     className='text-slate-400 max-w-lg text-center'

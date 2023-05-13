@@ -1,13 +1,9 @@
 import React from 'react'
 import NFTCard from './NFTCard'
-import nfts from '@/Data/nfts'
 import { motion } from 'framer-motion'
 import { ethers } from 'ethers'
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
-import Web3Modal from 'web3modal'
-// import NFTMarketplaceAddress from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
-import NFTMarketplaceAbi from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 import {
     parentNFTVariants,
     parentVariants,
