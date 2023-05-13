@@ -3,34 +3,37 @@ import NFTCard from './NFTCard'
 import nfts from '@/Data/nfts'
 import { motion } from 'framer-motion'
 import { ethers } from 'ethers'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
-import NFTMarketplaceAddress from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
+// import NFTMarketplaceAddress from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
 import NFTMarketplaceAbi from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 import {
     parentNFTVariants,
     parentVariants,
     childVariants,
 } from '@/Animations/hotProducts'
+import AppContext from '../context/AppContext'
+
 function NFTCardList() {
+    const context = useContext(AppContext);
     const [nfts, setNfts] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded')
-    // useEffect(() => {
-    //     loadNFTs()
-    // }, [])
+    useEffect(() => {
+        loadNFTs()
+    }, [])
     async function loadNFTs() {
         /* create a generic provider and query for unsold market items */
-        const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545/')
-        const contract = new ethers.Contract(NFTMarketplaceAddress.address, NFTMarketplaceAbi.abi, provider)
-        const data = await contract.fetchMarketItems()
+        // const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545/')
+        // const contract = new ethers.Contract(context.contractAddress, NFTMarketplaceAbi.abi, provider)
+        const data = await context.marketplace.fetchMarketItems()
 
         /*
         *  map over items returned from smart contract and format 
         *  them as well as fetch their token metadata
         */
         const items = await Promise.all(data.map(async i => {
-            const tokenUri = await contract.tokenURI(i.tokenId)
+            const tokenUri = await context.marketplace.tokenURI(i.tokenId)
             console.log(tokenUri)
             const meta = await axios.get(`https://${tokenUri}`)
             let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
@@ -48,7 +51,7 @@ function NFTCardList() {
         }))
         setNfts(items)
         setLoadingState('loaded')
-        console.log(items)
+        console.log(nfts)
     }
     const parentVariants = {
         hidden: {

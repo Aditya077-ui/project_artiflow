@@ -19,7 +19,7 @@ import {
     mobileLinkVariants,
 } from '@/Animations/mobilenav'
 import AppContext from '@/components/context/AppContext';
-import NFTMarketplaceAddress from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
+// import NFTMarketplaceAddress from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
 // import NFTMarketplaceAbi from '../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweENlNWYwNmVBOGE3MmMxRTI0ZDFEMzU2ODcxOTA3M2E3YjVBNTA3MTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODM0NjMwMzk2MDksIm5hbWUiOiJBcnRpZmxvdyJ9.baGrARtAQVqi7rUP_nIRzj36yumij9jdZG4ivPlR8fg'
 const client = new Web3Storage({ token: apiKey })
@@ -140,7 +140,7 @@ const CreateNFT = () => {
         // get tokenId of new nft 
         // approve marketplace to spend nft
         const price = ethers.utils.parseUnits(formInput.price, 'ether')
-        await (await context.marketplace.setApprovalForAll(NFTMarketplaceAddress.address, true)).wait()
+        // await (await context.marketplace.setApprovalForAll(context.contractAddress, true)).wait()
         // add nft to marketplace
         //   const listingPrice = ethers.utils.parseEther(price.toString())
         let listingPrice = await context.marketplace.getListingPrice()

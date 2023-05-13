@@ -9,10 +9,10 @@ import { ethers }  from 'ethers'
 function NFTCard({ img, title, price, likes, sale, tokenId }) {
     const context = useContext(AppContext);
 
-    async function buyNft(p, tID) {
-        const price = ethers.utils.parseUnits(p.toString(), 'ether')   
-        const transaction = await context.marketplace.createMarketSale(tID, {
-          value: price
+    async function buyNft() {
+        const myprice = ethers.utils.parseUnits(price.toString(), 'ether')   
+        const transaction = await context.marketplace.createMarketSale(tokenId, {
+          value: myprice
         })
         await transaction.wait()
         // loadNFTs()
@@ -50,7 +50,7 @@ function NFTCard({ img, title, price, likes, sale, tokenId }) {
                 </div>
                 {/* Hover */}
                 <div className='absolute hidden top-1/4 left-1/3 md:left-1/4 group-hover:flex animate-bounce transition-all ease-in-out duration-1000'>
-                    <button onClick = {buyNft(price,tokenId)} className='text-sm px-6 py-2 bg-indigo-600 rounded-md hover:bg-indigo-700 duration-200 ease-in-out'>
+                    <button onClick={buyNft} className='text-sm px-6 py-2 bg-indigo-600 rounded-md hover:bg-indigo-700 duration-200 ease-in-out'>
                         Place bid
                     </button>
                 </div>

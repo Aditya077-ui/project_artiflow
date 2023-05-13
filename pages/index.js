@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/runtime */
 
 import React, { useContext, useState } from 'react'
-import { ethers } from 'ethers'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -14,8 +14,7 @@ import Collections from '@/components/collections/Collections'
 import CTA from '@/components/JoinUs/CTA'
 import Blog from '@/components/Blog/blog'
 import Footer from '@/components/Footer/footer'
-import NFTMarketplaceAddress from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace-address.json'
-import NFTMarketplaceAbi from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
+
 import { motion } from 'framer-motion'
 import {
   parentNFTVariants,
@@ -29,53 +28,7 @@ import AppContext from '@/components/context/AppContext'
 
 
 export default function Home() {
-  // const [provider, setProvider] = useState()
-  const [loading, setLoading] = useState(true)
-  const [account, setAccount] = useState()
   const context = useContext(AppContext);
-  // MetaMask Login/Connect
-  const web3Handler = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(accounts[0])
-        context.setAccountContext(accounts[0])
-        // Get provider from Metamask
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        const signer = provider.getSigner()
-
-
-        window.ethereum.on('chainChanged', (chainId) => {
-          window.location.reload();
-        })
-
-        window.ethereum.on('accountsChanged', async function (accounts) {
-          setAccount(accounts[0])
-          context.setAccountContext(accounts[0])
-          await web3Handler()
-        })
-        setLoading(false)
-        console.log(loading)
-        loadContracts(signer)
-
-      } catch (err) {
-        console.error('User rejected account connection request')
-      }
-    } else {
-      alert('Please install Metamask to continue !')
-    }
-  }
-
-
-  const loadContracts = async (signer) => {
-    // Get deployed copies of contracts
-    const marketplace = new ethers.Contract(NFTMarketplaceAddress.address, NFTMarketplaceAbi.abi, signer)
-    context.setMarketplace(marketplace)
-    setLoading(false)
-    console.log(marketplace)
-
-  }
 
   return (
     <div>
@@ -86,14 +39,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <Navbar web3Handler={web3Handler} account={account} />
-        {!loading ?
+       
+        {!context.accountContext ?
+        ( 
+          <div className='flex h-screen items-center justify-center'>
           <motion.p
             variants={childVariants}
             className='text-slate-400 max-w-lg text-center'
           >
-            Connecting to the metamask....
+            Connect metamask wallet to continue...
           </motion.p>
+          </div>
+        )
           :
           (
             <div>
