@@ -39,18 +39,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-       
-        {!context.accountContext ?
-        ( 
-          <div className='flex h-screen items-center justify-center'>
-          <motion.p
-            variants={childVariants}
-            className='text-slate-400 max-w-lg text-center'
-          >
-            Connect metamask wallet to continue...
-          </motion.p>
-          </div>
-        )
+
+        {context.accountContext ?
+          (
+            <div className='flex h-screen items-center justify-center'>
+              <motion.p
+                variants={childVariants}
+                className='text-slate-400 max-w-lg text-center'
+              >
+                Connect metamask wallet to continue...
+              </motion.p>
+            </div>
+          )
           :
           (
             <div>
