@@ -1,22 +1,22 @@
-import blog1 from '../public/Assets/blogs/blog1.jpg'
-import blog2 from '../public/Assets/blogs/blog2.jpg'
-import blog3 from '../public/Assets/blogs/blog3.jpg'
+import jackneary from '../public/Assets/blogs/jackneary.jpg'
+import jennaisherwood from '../public/Assets/blogs/jennaisherwood.jpg'
+import samantha from '../public/Assets/blogs/samantha.jpg'
 
 const blogs = [
     {
-        img: blog1,
-        title: 'Mindfulness Activities for Kids & Toddlers with NFT',
-        desc: 'The app Zigazoo(opens in new tab) and its developer seems to think so. The TikTok-like app Zigaroo is aimed at children as young as three and its brag of being the "the world’s largest social network and NFT platform for kids".',
+        img: jackneary,
+        title: 'What are Non Fungible Token and Why should the World take Note? written by- Jack Neary',
+        desc: `An NFT is a digital collectible asset such as a piece of art or a trading card (or something even more at home on the internet such as a meme or a tweet) that provides a record of its ownership and authenticity and thus allows it to be sold and collected like a Picasso at Christie’s. Because they model the scarcity and uniqueness of traditional art works, they’re also quickly becoming an investment vehicle.`,
     },
     {
-        img: blog2,
-        title: 'Save Thousands Of Lives Through This NFT',
-        desc: 'As NFTs have exploded in popularity, participants in this world have shown remarkable willingness to leverage their art in support of charitable causes, including The Life You Can Save.',
+        img: jennaisherwood,
+        title: 'How NFTs Are Changing the Art World and the impact in the people? written by- Jenna Isherwood',
+        desc: 'In this blog post, Isherwood explores how NFTs are transforming the art world by providing new opportunities for artists to monetize their work and collectors to own and trade unique digital assets.She discusses the challenges and opportunities presented by this new technology.She discusses their potential to disrupt traditional art and collectibles markets, as well as their impact and potential risks for investors.',
     },
     {
-        img: blog3,
-        title: 'A place where technology meets craftsmanship',
-        desc: 'The first NFT,  "Fire & Ice Santoku", is a physical NFT, tied directly to the ownership of the custom Santoku. This NFT carries an agreement that upon sale, the knife will be shipped to the new owner. This NFT is therefore limited to only one edition.',
+        img: samantha,
+        title: 'The Ethics of NFTs: Exploring the Social Implications and indications written by- Samantha Reynolds',
+        desc: 'His blog post explores the ethical implications of NFTs, including issues around intellectual property, ownership, and environmental impact. It discusses the need for responsible use and development of this technology.This could involve creating clear guidelines around ownership and intellectual property rights, as well as exploring ways to reduce the environmental impact of NFT creation and trading',
     },
 ]
 
