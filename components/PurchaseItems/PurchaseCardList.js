@@ -48,8 +48,8 @@ function PurchaseCard_List() {
         setNfts(items)
         setLoadingState('loaded')
         setLoading(false)
-        console.log()
-        console.log(nfts)
+        
+        console.log(items)
     }
     const parentVariants = {
         hidden: {
@@ -96,6 +96,7 @@ function PurchaseCard_List() {
                             title={nft.name}
                             price={nft.price}
                             likes='20'
+                            tokenId={nft.tokenId}
                         />
                     
                     </motion.div>

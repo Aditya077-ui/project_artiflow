@@ -1,9 +1,23 @@
-import React from 'react'
+
 import { AiOutlineClockCircle, AiFillHeart } from 'react-icons/ai'
 import { FaEthereum } from 'react-icons/fa'
 import Image from 'next/image';
+import AppContext from '@/components/context/AppContext'
+import { ethers }  from 'ethers'
+import React, { useContext } from 'react'
 
-function Purchase_Card({ img, title, price, likes }) {
+
+function Purchase_Card({ img, title, price, likes ,tokenId}) {
+    const context = useContext(AppContext);
+
+    async function resellNFT() {
+        const myprice = ethers.utils.parseUnits(price.toString(), 'ether')   
+        const transaction = await context.marketplace.resellToken(tokenId, myprice, {
+          value: myprice
+        })
+        await transaction.wait()
+        // loadNFTs()
+      }
     return (
         <>
             <div className='flex group flex-col space-y-10 rounded-lg overflow-hidden border border-slate-400/10 pb-8 hover:shadow-xl duration-500 ease-in-out hover:shadow-white/5 relative'>
@@ -36,7 +50,11 @@ function Purchase_Card({ img, title, price, likes }) {
                     </div>
                 </div>
                 {/* Hover */}
-
+                <div className='absolute hidden top-1/4 left-1/3 md:left-1/4 group-hover:flex animate-bounce transition-all ease-in-out duration-1000'>
+                    <button onClick={resellNFT} className='text-sm px-6 py-2 bg-indigo-600 rounded-md hover:bg-indigo-700 duration-200 ease-in-out'>
+                        Resell My Nft
+                    </button>
+                </div>
             </div>
         </>
     )
